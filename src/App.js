@@ -1,24 +1,13 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { nanoid } from "nanoid";
+const bd = [
+  { id: nanoid(), name: "Jack", email: "jk@gmail.com", phone: "11458744" },
+  { id: nanoid(), name: "Max", email: "mx@gmail.com", phone: "1741225" },
+];
 
+console.log(bd);
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h3>Deploy application</h3>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
