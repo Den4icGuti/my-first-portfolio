@@ -12,10 +12,11 @@ const Item = ({ bd, index, onChange }) => {
   }
   return (
     <li className={styles.item}>
-      <span className={classes.join(" ")}>
+      <span className={classes.join("")}>
         <input
           className={styles.inputCheckbox}
           type="checkbox"
+         
           checked={bd.remove}
           onChange={() => onChange(bd.id)}
         />

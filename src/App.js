@@ -2,16 +2,23 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import ListItem from "./components/ListItem/ListItem";
 import Context from "./context";
-import AddTodo from "./Add todo/AddTodo";
 import { nanoid } from "nanoid";
 import Loader from "./Loader";
+import Modal from "./modal/Modal";
+
+const AddTodo = React.lazy(
+  () =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve(import("./Add todo/AddTodo")));
+    }, 3000)
+);
 
 function App() {
   const [bd, setBd] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos?_limit=4")
+    fetch("https://jsonplaceholder.typicode.com/todos?_limit=2")
       .then((response) => response.json())
       .then((bd) => {
         setTimeout(() => {
@@ -47,7 +54,9 @@ function App() {
     <Context.Provider value={{ removeUser }}>
       <div className="wrapper">
         <h3>React tutorial</h3>
-        <AddTodo onCreate={addTodo} />
+        <React.Suspense fallback={<Loader />}>
+          <AddTodo onCreate={addTodo} />
+        </React.Suspense>
 
         {loading && <Loader />}
 
@@ -56,6 +65,7 @@ function App() {
         ) : loading ? null : (
           <p>No todo</p>
         )}
+        <Modal />
       </div>
     </Context.Provider>
   );
